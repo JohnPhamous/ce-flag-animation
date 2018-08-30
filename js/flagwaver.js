@@ -1,64 +1,3 @@
-/**
- * Flag Waver
- *
- * Simulate a flag waving in the breeze right in your browser window.
- *
- */
-
-/*
- * Aug 9 2012
- *
- * Its Singapore's National Day, so
- * Making a quick tweaks to simulate the Singapore flag in the wind
- */
-
-/*
- * Aug 3 2012
- *
- * Since I started working for a new startup not too long ago,
- * I commute between home and work for over 2 hours a day.
- * Although this means less time on three.js,
- * I try getting a little coding on the train.
- *
- * This set of experiments started from a simple hook's law doodle,
- * to spring simulation, string simulation, and I realized
- * I once again stepped onto physics and particle simulation,
- * this time, more specifically soft body physics.
- *
- * Based on the "Advanced Character Physics" article,
- * this experiment attempts to use a "massless"
- * cloth simulation model. It's somewhat similiar
- * but simplier to most cloth simulations I found.
- *
- * This was coded out fairly quickly, so expect more to come
- * meanwhile feel free to experiment yourself and share
- *
- * Cheers,
- * Graphics Noob (aka @Blurspline, zz85)
- */
-
-/*
- * Suggested Readings
- *
- * Advanced Character Physics by Thomas Jakobsen Character -
- *     http://web.archive.org/web/20070610223835/http:/www.teknikus.dk/tj/gdc2001.htm
- * http://freespace.virgin.net/hugo.elias/models/m_cloth.htm
- * http://en.wikipedia.org/wiki/Cloth_modeling
- * http://cg.alexandra.dk/tag/spring-mass-system/
- * Real-time Cloth Animation -
- *     http://www.darwin3d.com/gamedev/articles/col0599.pdf
- */
-
-/*
- * Nov 14 2015
- *
- * Modified by /u/krikienoid for use in Flag Waver.
- */
-
-//
-// Flag Waver Tool
-//
-
 ;( function ( window, document, THREE, undefined ) {
 
     //
@@ -1006,7 +945,7 @@
 
     // Renderer settings
     var poleOffset  = 300,
-        poleHeight  = 1000;
+        poleHeight  = 500;
 
     // Renderer variables
     var vertexShader, fragmentShader,
@@ -1099,6 +1038,17 @@
         flag.setTexture( blankTexture );
         scene.add( flag.object );
         publicFlag = flag.createPublic();
+        
+        // init ground shadow
+        var geometry = new THREE.CircleGeometry(200, 500 );
+        var material = new THREE.MeshBasicMaterial( { color: 0xe0e6ec } );
+        var circle = new THREE.Mesh( geometry, material );
+        circle.position.y = poleOffset - poleHeight + 25;
+        circle.position.x = -4;
+        circle.position.z = -50;
+        circle.rotation.x = 30;
+        circle.receiveShadow = true;
+        scene.add( circle );
 
         // Begin animation
         animate();

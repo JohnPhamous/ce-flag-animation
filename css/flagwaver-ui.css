@@ -385,9 +385,3 @@ p, a {
     position  : relative;
     padding   : 0;
 }
-
-/* //// Background Image //// */
-
-.bg-sky {
-    background-color      : black;
-}
